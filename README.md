@@ -23,8 +23,8 @@
   - Умение без страха брать на себя ответственность и быть просто хорошим другом 
 
 - В чем я работаю:
-  - Construct 3
-  - PlayCanvas
+  - [Construct 3](https://www.construct.net/en)
+  - [PlayCanvas](https://playcanvas.com/)
 
 ## Bio
 
