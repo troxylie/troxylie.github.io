@@ -4,6 +4,11 @@
 
 ## Что я умею?
 
+- Stack:
+  - JavaScript
+  - HTML5
+  - PHP
+
 - Hard Skills:
   - Standalone-игры 
   - Web-игры
