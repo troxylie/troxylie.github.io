@@ -1,0 +1,30 @@
+[
+	{
+		"title": "knife",
+		"title_ru": "Нож",
+		"title_en": "Knife",
+		"type_ru":"Ножи",
+		"type_en":"Knifes",
+		"description_ru": "Им можно почесать спину, а еще порезать.",
+		"description_en": "Good think to scratch back.",
+		"animation": "knifes",
+		"icon": "0",
+		"rare": "common",
+		"createdby_ru":"",
+		"createdby_en":""
+	},
+	{
+		"title": "gun",
+		"title_ru": "Револьвер",
+		"title_en": "Revolver",
+		"type_ru":"Пистолеты",
+		"type_en":"Rifles",
+		"description_ru": "Им можно сделать пиу-пиу, правда больно?",
+		"description_en": "Bruh, how do u feel? Western-boy",
+		"animation": "rifles",
+		"icon": "0",
+		"rare": "common",
+		"createdby_ru":"",
+		"createdby_en":""
+	}
+]
