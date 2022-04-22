@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
+</head>
+<body>
+    <meta name="ad.size" content="width=100%,height=100%">
+
+    <script charset="utf-8">
+var config = {
+    type: Phaser.AUTO,
+    width: 450,
+    height: 800,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 0 },
+            debug: false
+        }
+    },
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+    }
+};
+
+var game = new Phaser.Game(config);
+
+function preload ()
+{
+    this.load.image('sky', 'assets/part3.png');
+    this.load.image('ground', 'assets/ground.png');
+    this.load.image('hero', 'assets/hero.png');
+    this.load.image('points1', 'assets/points1.png');
+    this.load.image('points2', 'assets/points2.png');
+    this.load.image('points3', 'assets/points3.png');
+    this.load.image('points4', 'assets/points4.png');
+    this.load.image('points5', 'assets/points5.png');
+    this.load.image('points6', 'assets/points6.png');
+    this.load.image('dc', 'assets/dc.png');
+    this.load.image('blur', 'assets/blur.png');
+    this.load.image('button', 'assets/button.png')
+}
+
+var platforms;
+
+var myArray = [
+  "points1",
+  "points2",
+  "points3",
+  "points4",
+  "points5",
+  "points6",
+];
+
+var randomItem = myArray[Math.floor(Math.random()*myArray.length)];
+
+var text;
+
+var score = 0;
+var scoreText;
+var opacity = 1;
+var letsgo;
+
+function create ()
+{
+    background = this.add.image(340, 550, 'sky');
+    background.setScale(225,400);
+
+    plat = this.physics.add.staticGroup();
+    //platforms.create(config.width/2, platforms.width/2, 'ground').setScale(config.width/32,1).refreshBody();
+    //platforms.create(config.width/2, config.height-platforms.width/2, 'ground').setScale(config.width/32,1).refreshBody();
+    //platforms.create(config.width-platforms.width/2, config.height/2, 'ground').setScale(1,config.height/32).refreshBody();
+
+    // hero
+
+    plat.create(114,183,'ground').setScale(6.75,0.35).refreshBody();
+    plat.create(11,398,'ground').setScale(0.35,13.8).refreshBody();
+    plat.create(119,614,'ground').setScale(7,0.35).refreshBody();
+    plat.create(440,398.5,'ground').setScale(0.35,13.8).refreshBody();
+    plat.create(355,183,'ground').setScale(5.1,0.35).refreshBody();
+    plat.create(355,614,'ground').setScale(5.1,0.35).refreshBody();
+    plat.create(333,452,'ground').setScale(3.65,0.35).refreshBody();
+    plat.create(360,290,'ground').setScale(5,0.35).refreshBody();
+    plat.create(149,237,'ground').setScale(5.1,0.35).refreshBody();
+    plat.create(167,345,'ground').setScale(6.8,0.35).refreshBody();
+    plat.create(168,398,'ground').setScale(3.5,0.35).refreshBody();
+    plat.create(144,560,'ground').setScale(2,0.35).refreshBody();
+    plat.create(37,560,'ground').setScale(1.4,0.35).refreshBody();
+    plat.create(37,290,'ground').setScale(1.4,0.35).refreshBody();
+    plat.create(196,290,'ground').setScale(1.8,0.35).refreshBody();
+    plat.create(196,453,'ground').setScale(1.8,0.35).refreshBody();
+    plat.create(96,453,'ground').setScale(1.8,0.35).refreshBody();
+    plat.create(277,506,'ground').setScale(3.1,0.35).refreshBody();
+    plat.create(384,398,'ground').setScale(3.5,0.35).refreshBody();
+    plat.create(303,237,'ground').setScale(1.5,0.35).refreshBody();
+    plat.create(331,559,'ground').setScale(3.5,0.35).refreshBody();
+    plat.create(357,344,'ground').setScale(1.8,0.35).refreshBody();
+    plat.create(225.5,501,'ground').setScale(0.35,6.8).refreshBody();
+    plat.create(279,313,'ground').setScale(0.35,5.1).refreshBody();
+    plat.create(333,317,'ground').setScale(0.35,2).refreshBody();
+    plat.create(386,207,'ground').setScale(0.35,1.8).refreshBody();
+    plat.create(386,505.4,'ground').setScale(0.35,3.7).refreshBody();
+    plat.create(279,582,'ground').setScale(0.35,1.8).refreshBody();
+    plat.create(172,584,'ground').setScale(0.35,1.8).refreshBody();
+    plat.create(172,477,'ground').setScale(0.35,1.8).refreshBody();
+    plat.create(118.2,507,'ground').setScale(0.39,3.2).refreshBody();
+    plat.create(118.2,319,'ground').setScale(0.39,1.8).refreshBody();
+    plat.create(64,448,'ground').setScale(0.39,3.6).refreshBody();
+    plat.create(64,263.5,'ground').setScale(0.39,2.02).refreshBody();
+    plat.create(225,263.5,'ground').setScale(0.39,2.01).refreshBody();
+
+    player = this.physics.add.sprite(config.width/2, config.height/1.2, 'hero');
+    player.setScale(0.125);
+
+    points = this.physics.add.sprite(411,583,'points1');
+    points.setScale(0.4);
+    this.physics.add.overlap(player, points, collectPoint, null, this);
+    points = this.physics.add.sprite(253,475,'points2');
+    points.setScale(0.4);
+    this.physics.add.overlap(player, points, collectPoint, null, this);
+    points = this.physics.add.sprite(88,537,'points3');
+    points.setScale(0.4);
+    this.physics.add.overlap(player, points, collectPoint, null, this);
+    points = this.physics.add.sprite(133,370,'points4');
+    points.setScale(0.4);
+    this.physics.add.overlap(player, points, collectPoint, null, this);
+    points = this.physics.add.sprite(354,255,'points5');
+    points.setScale(0.4);
+    this.physics.add.overlap(player, points, collectPoint, null, this);
+    points = this.physics.add.sprite(410,365,'points6');
+    points.setScale(0.4);
+    this.physics.add.overlap(player, points, collectPoint, null, this);
+
+    player.setCollideWorldBounds(true);
+
+    this.physics.add.collider(player, plat);
+
+    this.physics.add.overlap(player, points, collectPoint, null, this);
+
+    var style = { font: "bold 32px Arial", fill: "#fff", balign: 'center'};
+    text = this.add.text(config.width/2, 60, "Собрано штук: ", style).setOrigin(0.5);
+    text.setShadow(3, 3, 'rgba(0,0,0,0.2)', 2);
+    var style2 = { font: "bold 45px Arial", fill: "#fff", balign: 'center'};
+    text2 = this.add.text(config.width/2, 120, "0/5", style2).setOrigin(0.5);
+    text2.setShadow(3, 3, 'rgba(0,0,0,0.2)', 2);
+    //text.setTextBounds(50, 100, 800, 100);
+
+
+    blur = this.add.image(225,400,'blur').setScale(1.1);
+
+var style3 = { font: "bold 28px Arial", fill: "#fff", balign: 'center'};
+
+    textstart = this.add.text(config.width/2, 120, "Соберите 5 блюд — ", style3).setOrigin(0.5);
+    textstart.setShadow(3, 3, 'rgba(255,255,255,0.2)', 2);
+
+    var style4 = { font: "bold 20px Arial", fill: "#fff", balign: 'center'};
+
+    textstart2 = this.add.text(config.width/2, 160, "получите промокод на 5 доставок", style4).setOrigin(0.5);
+    textstart2.setShadow(3, 3, 'rgba(255,255,255,0.2)', 2);
+
+    button = this.add.sprite(225,550,'button').setInteractive().setOrigin(0.5).setScale(0.75)
+    .on('pointerdown', () => button.setScale( 0.8 ))
+    .on('pointerup', () => button.setScale( 0.75 )).on('pointerup', () => letsgo = true);
+
+
+    herosprite = this.add.sprite(config.width/2,280,'hero').setScale(0.5);
+
+
+}
+
+function collectPoint (player, points)
+{
+    points.disableBody(true, true);
+    score += 1;
+}
+
+// function clickMe (button) {
+//     console.log('clicked')
+// }
+
+
+function update ()
+{
+    cursors = this.input.keyboard.createCursorKeys();
+    pointer = this.input.activePointer;
+
+    if (letsgo == true) {
+        opacity -= 0.01;
+    }
+
+
+    if (pointer.isDown && Phaser.Math.Distance.Between(player.x, player.y, pointer.x, pointer.y) > 10 && letsgo == true) {
+    var touchX = pointer.x;
+    var touchY = pointer.y;
+    this.physics.moveToObject(player, pointer, 200);
+    player.setAngle((Phaser.Math.Angle.Between(player.x, player.y, pointer.x, pointer.y)*180/Math.PI));
+}
+    else {
+        player.setVelocity(0);
+    }
+
+    //scoreText.setText('Собрано штук: ' + score + "\n\nTouchX: " + pointer.x + "\nTouchY: " + pointer.y);
+    text2.setText(score + '/5');
+
+    blur.alpha = opacity;
+    textstart.alpha = opacity;
+    textstart2.alpha = opacity;
+    herosprite.alpha = opacity;
+    button.alpha = opacity;
+
+
+//    if (cursors.left.isDown)
+//{
+//    player.setVelocityX(-160);
+//}
+//else if (cursors.right.isDown)
+//{
+//    player.setVelocityX(160);
+//}
+//else
+//{
+//    player.setVelocityX(0);
+//}
+//
+//if (cursors.up.isDown)
+//{
+//    player.setVelocityY(-160);
+//}
+//else if (cursors.down.isDown) {
+//    player.setVelocityY(160);
+//}
+//else {
+//    player.setVelocityY(0);
+//}
+    
+}
+
+</script>
+
+</body>
+</html>
