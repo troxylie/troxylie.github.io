@@ -1,33 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>New project</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-
-<meta name="generator" content="Construct 3">
-
-	<link rel="manifest" href="appmanifest.json">
-	<link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128.png">
-	<link rel="apple-touch-icon" sizes="256x256" href="icons/icon-256.png">
-	<link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
-	<link rel="icon" type="image/png" href="icons/icon-512.png">
-
-<link rel="stylesheet" href="style.css">
-
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>APNG VK_API</title>
 </head>
 <body>
-<div id="fb-root"></div>
+<form method="post" enctype="multipart/form-data">
+	<div class="custom-file">
+		<input type="file" id="fileupload">
+	</div>
+</form>
+<form>
+	<div>
+   		<input type="button" id="myBtn" value="Отправить запрос">
+ 	</div>
+</form>
 
-	<noscript>
-		<div id="notSupportedWrap">
-			<h2 id="notSupportedTitle">This content requires JavaScript</h2>
-			<p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
-		</div>
-	</noscript>
-	<script src="scripts/supportcheck.js"></script>
-	<script src="scripts/offlineclient.js" type="module"></script>
-	<script src="scripts/main.js" type="module"></script>
-	<script src="scripts/register-sw.js" type="module"></script>
+<script src="jquery-3.6.0.min.js"></script>
+<script>
+	const y = document.getElementById("myBtn");
+	y.addEventListener('click', updateButton);
+
+	function updateButton() {
+  		console.log('ura');
+
+  		$.ajax({
+		url: 'https://pu.vk.com/c857412/ss2167/upload.php?act=do_add&mid=555144095&aid=-14&gid=207613032&hash=217db1bbe7ed3483c7c27fb632e750bc&rhash=19d4f780e6c093cab16fa124f5791d58&swfupload=1&api=1&wallphoto=1',
+		method: 'POST',
+		dataType: 'JSON',
+		data: x,
+		success: function (data) {
+			console.log(data);
+		}
+		})
+
+  		}
+
+	$(function(){
+		$("#fileupload").change(function(event) {
+			var x = URL.createObjectURL(event.target.files[0]);
+			console.log(x);
+			$.ajax({
+		url: 'https://pu.vk.com/c234031/ss2009/upload.php?act=do_add&mid=555144095&aid=-3&gid=0&hash=ae00c67276d755ce8a8f14b3975fe856&rhash=e14b4aa60fe87a55fd900508716a2795&swfupload=1&api=1&mailphoto=1',
+		method: 'POST',
+		dataType: 'JSON',
+		data: x,
+		success: function (data) {
+			console.log(data);
+		}
+		})
+		});
+	})
+	// 877629a4f687ca65079a24a5e49a8a1623cc6b8cc21e9a23396fd8a7e62393b42a9a1ac4d9ad756aec72d token
+	// 207613032 group_id
+
+</script>
 </body>
 </html>
