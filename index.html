@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Меня зовут Сережа!</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="wrapper">
+		<main class="main">
+			<p>Меня зовут Сережа!</p>
+			<button class="link1">Привет!</button>
+		</main>
+		<main class="main2">
+			<p id="text2">Я - разработчик игр, готов взяться за ваш заказ или принять участие в разработке вашего приложения в дружном коллективе! :)</p>
+			<button class="link2">Что ты умеешь?</button>
+		</main>
+		<main class="main3">
+			<p id="text3">Stack:</p>
+			<ul>
+			 <li>JavaScript</li>
+			 <li>HTML5</li>
+			 <li>CSS</li>
+			 <li>Three.js</li>
+			 <li>Phaser.js</li>
+			</ul>
+			<button class="link3">Сойдет, что еще?</button>
+		</main>
+		<main class="main4">
+			<p id="text4">Два основных движка которые я использую это <a href="https://www.construct.net/en" Target="_blank">Construct 3</a> и <a href="https://playcanvas.com/" Target="_blank">PlayCanvas</a>, возможно ты о них слышал <:)</p>
+			<button class="link4">Окей, личные черты?</button>
+		</main>
+		<main class="main5">
+			<ul>
+			 <li>Умение грамотно расставлять задачи</li>
+			 <li>Умение соблюдать целостность проекта и поддерживать вовлеченность коллектива в проект</li>
+			 <li>Умение без страха брать на себя ответственность и быть просто хорошим другом!</li>
+			</ul>
+			<button class="link5">Хорошо, но у меня еще остались вопросы.</button>
+		</main>
+		<main class="main6">
+			<p id="text5">И я с радостью на них отвечу! Иконки ниже помогут тебе со мной связаться, надеюсь мы подружимся!</p>
+			<button class="link6">Спасибо!</button>
+		</main>
+		<footer class="footer">
+			<div id="icons">
+				<a href="https://github.com/troxylie" Target="_blank"><img src="icons/gh.png" width="100" height="100"></a>
+				<a href="https://vk.com/troxylie" Target="_blank"><img src="icons/vk.png" width="100" height="100"></a>
+				<a href="https://telegram.me/eyefo" Target="_blank"><img src="icons/tg.png" width="100" height="100"></a>		
+			</div>
+		</footer>
+	</div>
+	<script type=module src="three/threeback.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript">
+
+		const title = document.querySelector("p");
+		const titleLength = title.textContent.length;
+		title.style.setProperty("--typing-steps", titleLength);
+
+		$(document).ready(function() {
+			var scrollTop = $(".scrollTop");
+
+			  $('.link1').click(function() {
+			    $('html, body').animate({
+			      scrollTop: $(document).height()/6
+			    }, 1000);
+			    return false;
+			    }); 
+
+			  $('.link2').click(function() {
+			    $('html, body').animate({
+			      scrollTop: $(document).height()/6*2
+			    }, 1000);
+			    return false;
+			    }); 
+
+			  $('.link3').click(function() {
+			    $('html, body').animate({
+			      scrollTop: $(document).height()/6*3
+			    }, 1000);
+			    return false;
+			    }); 
+
+			  $('.link4').click(function() {
+			    $('html, body').animate({
+			      scrollTop: $(document).height()/6*4
+			    }, 1000);
+			    return false;
+			    }); 
+			  $('.link5').click(function() {
+			    $('html, body').animate({
+			      scrollTop: $(document).height()/6*5
+			    }, 1000);
+			    return false;
+			    }); 
+
+			  $('.link6').click(function() {
+			    $('html, body').animate({
+			      scrollTop: 0
+			    }, 500);
+			    return false;
+
+			  });
+			});
+
+	</script>
+</body>
+</html>
