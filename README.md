@@ -8,6 +8,8 @@
   - JavaScript
   - HTML5
   - PHP
+  - Phaser.JS
+  - THREE.JS
 
 - Hard Skills:
   - Standalone-игры 
