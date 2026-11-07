@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Everluxe CRM — записи</title>
+  <link rel="icon" href="assets/logo-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/admin.css?v=3">
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <a class="side-brand" href="admin.html"><span class="mk"></span><span>EVERLUXE<small>CRM · демо</small></span></a>
+    <nav class="side-nav">
+      <a class="on" href="#"><i>◷</i>Записи <b id="newCount"></b></a>
+      <a class="off" title="В демо не реализовано"><i>☺</i>Клиенты</a>
+      <a class="off" title="В демо не реализовано"><i>✦</i>Мастера</a>
+      <a class="off" title="В демо не реализовано"><i>₽</i>Услуги и цены</a>
+      <a class="off" title="В демо не реализовано"><i>⚙</i>Настройки</a>
+    </nav>
+    <div class="side-foot">
+      <a href="index.html" target="_blank">↗ Открыть сайт</a>
+      <button id="resetDemo">↺ Сбросить демо-данные</button>
+      <div class="me"><span class="av">А</span><div><b>Администратор</b><small>admin@everluxe</small></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="top">
+      <div>
+        <h1>Записи</h1>
+        <div class="datebar">
+          <button class="ic" id="prevDay" aria-label="Предыдущий день">‹</button>
+          <button class="date-label" id="dateLabel"></button>
+          <input type="date" id="datePick" aria-label="Выбрать дату">
+          <button class="ic" id="nextDay" aria-label="Следующий день">›</button>
+          <button class="pill" id="todayBtn">Сегодня</button>
+        </div>
+      </div>
+      <div class="top-actions">
+        <label class="search"><span>⌕</span><input id="search" placeholder="Имя или телефон"></label>
+        <button class="btn-gold" id="addBtn">+ Новая запись</button>
+      </div>
+    </header>
+
+    <section class="kpis" id="kpis"></section>
+
+    <div class="toolbar">
+      <div class="seg" role="tablist">
+        <button role="tab" aria-selected="true" data-view="grid">Расписание</button>
+        <button role="tab" aria-selected="false" data-view="list">Список</button>
+      </div>
+      <div class="filters" id="statusFilter"></div>
+    </div>
+
+    <section class="panel" id="gridView"></section>
+    <section class="panel" id="listView" hidden></section>
+  </main>
+</div>
+
+<!-- Карточка записи -->
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-bg" data-close></div>
+  <div class="drawer-box" id="drawerBox"></div>
+</aside>
+
+<!-- Новая запись -->
+<div class="dialog" id="dialog" aria-hidden="true">
+  <div class="drawer-bg" data-close-d></div>
+  <form class="dialog-box" id="newForm">
+    <div class="dlg-head"><h2>Новая запись</h2><button type="button" class="ic" data-close-d aria-label="Закрыть">×</button></div>
+    <div class="grid2">
+      <label>Имя клиента<input name="name" required placeholder="Анна"></label>
+      <label>Телефон<input name="phone" required placeholder="+7 (___) ___-__-__"></label>
+      <label class="span2">Услуга<select name="serviceId" id="fService"></select></label>
+      <label>Мастер<select name="masterId" id="fMaster"></select></label>
+      <label>Дата<input type="date" name="date" id="fDate" required></label>
+      <label class="span2">Время<select name="time" id="fTime" required></select></label>
+      <label class="span2">Комментарий<textarea name="comment" rows="2" placeholder="Дизайн, пожелания, источник"></textarea></label>
+    </div>
+    <div class="dlg-foot"><button type="button" class="pill" data-close-d>Отмена</button><button class="btn-gold">Создать запись</button></div>
+  </form>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<script src="assets/data.js?v=3"></script>
+<script src="assets/admin.js?v=3"></script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!doctype html>
+<!-- kind: place · trade: nail studio · main action: Записаться онлайн
+     look: цвета клиента (крем и шалфей из карточек ВК, чёрный и золото из логотипа), Forum + Manrope, квадратные фото
+     type moment: address · brand band: обучение · hero: place (фото клиента на всю ширину, текст под ним)
+     ЗАГЛУШКИ (data-assumed): адрес, телефон, часы, цены, имена мастеров, отзывы 2–3 -->
+<html lang="ru" data-type="place">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Everluxe — студия маникюра и педикюра на Покровке</title>
+  <meta name="description" content="Маникюр, педикюр, дизайн ногтей и обучение в студии Everluxe у метро Китай-город. Онлайн-запись к мастеру.">
+  <meta name="page-type" content="place"><meta name="site-kind" content="other"><meta name="page-kind" content="place">
+  <meta name="theme-color" content="#F3EEE6">
+  <meta property="og:title" content="Everluxe — студия маникюра и педикюра">
+  <meta property="og:description" content="Маникюр, педикюр и обучение у метро Китай-город. Онлайн-запись к мастеру.">
+  <meta property="og:image" content="assets/works/w9.jpg">
+  <link rel="icon" href="assets/logo-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip" href="#main">К содержанию</a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__bar">
+    <a class="logo" href="#top" aria-label="Everluxe, наверх"><span class="logo__mark" aria-hidden="true"></span><span class="logo__name">EVERLUXE</span></a>
+    <nav class="nav__links" id="navLinks" aria-label="Разделы">
+      <a class="link" href="#price">Прайс</a>
+      <a class="link" href="#works">Работы</a>
+      <a class="link" href="#masters">Мастера</a>
+      <a class="link" href="#reviews">Отзывы</a>
+      <a class="link" href="#courses">Обучение</a>
+      <a class="link" href="#visit">Как добраться</a>
+    </nav>
+    <div class="nav__actions">
+      <button class="btn btn--sm" data-book>Записаться онлайн</button>
+      <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Открыть меню">
+        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 6h14M2 12h14" stroke="currentColor" stroke-width="1.6"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- 1. Hero: фото работы на всю ширину, ничего на нём; текст под ним -->
+  <section class="hero" id="top" data-enter aria-labelledby="hero-h">
+    <div class="hero__media">
+      <img src="assets/works/w9.jpg" alt="Короткие миндальные ногти: белое и нюдовое покрытие с золотой поталью и тонкой чёрной линией" fetchpriority="high">
+    </div>
+    <div class="wrap grid hero__text">
+      <h1 id="hero-h" class="e" style="--i:0">Студия маникюра и педикюра на Покровке</h1>
+      <div class="hero__side">
+        <p class="hero__lead e" style="--i:1">Маникюр с покрытием — <span class="num" data-assumed>2 300 ₽</span>, педикюр — <span data-assumed>2 800 ₽</span>. Каждый день с&nbsp;10 до&nbsp;21, у&nbsp;метро Китай-город.</p>
+        <button class="btn e" style="--i:2" data-book id="heroBtn">Записаться онлайн</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Как добраться: адрес крупно (type moment), панель и карта Google -->
+  <section class="section" id="visit" data-place="visit" aria-labelledby="visit-h">
+    <div class="wrap">
+      <h2 id="visit-h">Как нас найти</h2>
+      <p class="type-moment"><a data-map target="_blank" rel="noopener" data-assumed>Покровка, <span style="white-space:nowrap">Китай-город</span></a></p>
+      <div class="grid visit-split">
+        <div class="visit span-6">
+          <div class="visit__cols">
+            <p class="visit__addr"><a class="link" data-map target="_blank" rel="noopener" data-assumed>ул. Покровка, Москва</a><span class="sub" data-metro></span><span class="sub"><a class="link" data-phone data-assumed></a></span></p>
+            <ul class="hours" aria-label="Часы работы" data-assumed>
+              <li><span>Понедельник — пятница</span><span>10:00–21:00</span></li>
+              <li><span>Суббота, воскресенье</span><span>10:00–21:00</span></li>
+            </ul>
+          </div>
+          <p class="visit__note">Только по записи: так мастер готовит место и стерильный набор к вашему приходу.</p>
+        </div>
+        <div class="map span-6" id="map"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Прайс: группы текстом, без вкладок; строка открывает запись на эту услугу -->
+  <section class="section section--surface" id="price" aria-labelledby="price-h">
+    <div class="wrap">
+      <div class="head-row">
+        <h2 id="price-h">Прайс на маникюр и педикюр</h2>
+        <p>Цена фиксируется при записи. Нажмите на услугу, чтобы выбрать время.</p>
+      </div>
+      <div class="grid groups" id="groups"></div>
+      <p class="price-note">Снятие покрытия нашего мастера — бесплатно. Пилки и баффы одноразовые, металл проходит сухожар.</p>
+    </div>
+  </section>
+
+  <!-- 4. Работы: фото клиента, подпись — работа и мастер -->
+  <section class="section" id="works" aria-labelledby="works-h">
+    <div class="wrap">
+      <div class="head-row">
+        <h2 id="works-h">Работы мастеров студии</h2>
+        <a class="link-arrow" data-vk target="_blank" rel="noopener"><span>Больше работ во&nbsp;ВКонтакте</span><span class="arr" aria-hidden="true">→</span></a>
+      </div>
+      <div class="works" id="worksGrid"></div>
+    </div>
+  </section>
+
+  <!-- 5. Мастера -->
+  <section class="section section--surface" id="masters" aria-labelledby="masters-h">
+    <div class="wrap">
+      <div class="head-row">
+        <h2 id="masters-h">Мастера Everluxe</h2>
+        <p>Выберите мастера — покажем только его свободное время.</p>
+      </div>
+      <div class="masters" id="mastersGrid"></div>
+    </div>
+  </section>
+
+  <!-- 6. Отзывы: рамка из карточек клиента -->
+  <section class="section" id="reviews" aria-labelledby="reviews-h">
+    <div class="wrap">
+      <div class="head-row">
+        <h2 id="reviews-h">Отзывы гостей</h2>
+        <a class="link-arrow" data-vk target="_blank" rel="noopener"><span>Все отзывы во&nbsp;ВКонтакте</span><span class="arr" aria-hidden="true">→</span></a>
+      </div>
+      <div class="reviews" id="reviewsGrid"></div>
+    </div>
+  </section>
+
+  <!-- 7. Обучение: единственный тёмный блок, чёрный и золото логотипа -->
+  <section class="section brand-band" id="courses" aria-labelledby="courses-h">
+    <div class="wrap grid">
+      <div class="span-5">
+        <h2 id="courses-h">Курсы маникюра для новичков и мастеров</h2>
+        <p class="lead">Группы до&nbsp;4 человек, практика на&nbsp;моделях, материалы студии. После курса — сертификат.</p>
+        <button class="btn btn--inv" data-book data-service="c1">Записаться на курс</button>
+      </div>
+      <div class="span-6" style="grid-column-end:-1">
+        <ul class="rows" id="courseRows"></ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="close">
+      <div>
+        <h2 id="close-h">Запишитесь к мастеру онлайн</h2>
+        <p>Свободное время на две недели вперёд — сразу в форме.</p>
+      </div>
+      <button class="btn" data-book>Записаться онлайн</button>
+    </div>
+    <div class="grid foot">
+      <p class="foot__addr span-7"><a class="link" data-map target="_blank" rel="noopener" data-assumed>ул. Покровка, Китай-город</a><small data-metro></small></p>
+      <nav class="foot__nav span-4" style="grid-column-end:-1" aria-label="Внизу страницы">
+        <a class="link" href="#price">Прайс</a>
+        <a class="link" href="#works">Работы</a>
+        <a class="link" href="#masters">Мастера</a>
+        <a class="link" data-vk target="_blank" rel="noopener">ВКонтакте</a>
+        <a class="link" data-phone data-assumed></a>
+      </nav>
+    </div>
+    <div class="foot__legal"><span>© <span id="year"></span> Everluxe</span><a class="link" href="admin.html">CRM для администратора (демо)</a></div>
+    <p class="foot__name" aria-hidden="true"><span>E</span><span>V</span><span>E</span><span>R</span><span>L</span><span>U</span><span>X</span><span>E</span></p>
+  </div>
+</footer>
+
+<div class="actionbar" id="actionbar"><button class="btn" data-book>Записаться онлайн</button></div>
+
+<!-- Запись: услуга → мастер → дата и время → контакты -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal__bg" data-close></div>
+  <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal__close" data-close aria-label="Закрыть окно записи">×</button>
+    <h2 id="modalTitle">Запись</h2>
+    <div class="steps" id="steps" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div id="stepBody"></div>
+    <div class="modal__foot" id="modalFoot">
+      <button class="btn btn--ghost" id="backBtn">Назад</button>
+      <button class="btn" id="nextBtn">Дальше</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/data.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

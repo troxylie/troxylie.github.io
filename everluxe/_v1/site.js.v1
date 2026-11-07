@@ -1,0 +1,240 @@
+(function () {
+  const E = window.EL;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const initials = (n) => n.split(' ').map((p) => p[0]).join('');
+
+  /* ---------- общие поля ---------- */
+  $$('[data-phone]').forEach((a) => { a.textContent = E.studio.phone; a.href = 'tel:' + E.studio.phoneHref; });
+  $$('[data-vk]').forEach((a) => { a.href = E.studio.vk; });
+  $$('[data-address]').forEach((el) => { el.innerHTML = `${E.studio.address}<small>${E.studio.metro}</small>`; });
+  $$('[data-hours]').forEach((el) => { el.textContent = E.studio.hours; });
+  $('#year').textContent = new Date().getFullYear();
+
+  /* ---------- шапка ---------- */
+  const header = $('.header');
+  addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 10), { passive: true });
+  const burger = $('#burger'), nav = $('#nav');
+  burger.addEventListener('click', () => { const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
+  $$('a', nav).forEach((a) => a.addEventListener('click', () => nav.classList.remove('open')));
+
+  /* ---------- hero ---------- */
+  $('#heroArt').innerHTML = E.nailArt({ title: 'Нюдовый маникюр', bg: '#B7C7BB', style: 'french', c1: '#EBD7C6', c2: '#FBF8F3' }, 'hero');
+
+  function nearestSlot() {
+    for (let d = 0; d < 7; d++) {
+      const date = E.toISO(E.addDays(new Date(), d));
+      let best = null;
+      E.masters.forEach((m) => { const s = E.freeSlots(m.id, date, 105)[0]; if (s && (!best || s < best)) best = s; });
+      if (best) return (d === 0 ? 'сегодня' : d === 1 ? 'завтра' : new Date(date + 'T12:00').toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' })) + ' в ' + best;
+    }
+    return 'уточняйте по телефону';
+  }
+  $('#nearest').textContent = nearestSlot();
+
+  /* ---------- прайс ---------- */
+  const tabs = $('#tabs'), panel = $('#pricePanel');
+  function renderPrice(cat) {
+    tabs.innerHTML = E.categories.map((c) => {
+      const n = E.services.filter((s) => s.cat === c.id).length;
+      return `<button class="tab" role="tab" aria-selected="${c.id === cat}" data-cat="${c.id}">${c.name}<small>${n} услуг</small></button>`;
+    }).join('');
+    panel.innerHTML = E.services.filter((s) => s.cat === cat).map((s) => `
+      <div class="price-row">
+        <div>
+          <div class="price-name">${s.name}${s.hit ? '<span class="hit">хит</span>' : ''}</div>
+          <div class="price-note">${s.note}${s.course ? '' : ' · ' + E.dur(s.dur)}</div>
+        </div>
+        <div class="price-val">${s.from ? '<small>от</small>' : ''}${E.rub(s.price)}</div>
+        <button class="price-book" data-book data-service="${s.id}" aria-label="Записаться: ${s.name}">→</button>
+      </div>`).join('');
+  }
+  tabs.addEventListener('click', (e) => { const t = e.target.closest('[data-cat]'); if (t) renderPrice(t.dataset.cat); });
+  $$('.quick-card[data-cat]').forEach((a) => a.addEventListener('click', () => renderPrice(a.dataset.cat)));
+  renderPrice('mani');
+
+  /* ---------- работы ---------- */
+  const wf = $('#workFilter'), wg = $('#works-grid');
+  wf.innerHTML = `<button class="chip" aria-pressed="true" data-m="all">Все работы</button>` +
+    E.masters.map((m) => `<button class="chip" aria-pressed="false" data-m="${m.id}">${m.short}</button>`).join('');
+  wg.innerHTML = E.works.map((w, i) => {
+    const m = E.master(w.master);
+    return `<figure class="work reveal" data-m="${w.master}">
+      <div class="work-img">${E.nailArt(w, i)}</div>
+      <figcaption><b>${w.title}</b><span>мастер <a href="#masters">${m.short}</a></span></figcaption>
+    </figure>`;
+  }).join('');
+  wf.addEventListener('click', (e) => {
+    const c = e.target.closest('[data-m]'); if (!c) return;
+    $$('.chip', wf).forEach((x) => x.setAttribute('aria-pressed', x === c));
+    $$('.work', wg).forEach((w) => w.classList.toggle('hide', c.dataset.m !== 'all' && w.dataset.m !== c.dataset.m));
+  });
+
+  /* ---------- мастера ---------- */
+  $('#mastersGrid').innerHTML = E.masters.map((m) => `
+    <article class="master reveal">
+      <div class="master-photo" style="background:linear-gradient(160deg, ${m.tone[0]}, ${m.tone[1]})">
+        <span class="ini">${initials(m.name)}</span>
+        <span class="exp">Опыт ${m.exp}</span>
+      </div>
+      <h3>${m.name}</h3>
+      <div class="role">${m.role}</div>
+      <div class="tags">${m.tags.map((t) => `<span>${t}</span>`).join('')}</div>
+      <button class="btn btn-ghost btn-sm" data-book data-master="${m.id}">Записаться к ${m.dat}</button>
+    </article>`).join('');
+
+  /* ---------- отзывы ---------- */
+  const track = $('#reviewsTrack');
+  track.innerHTML = E.reviews.map((r, i) => `
+    <article class="review ticket">
+      <div class="ticket-in">${i % 2 ? '<i class="cut l"></i><i class="cut r"></i>' : '<i class="cut tl"></i><i class="cut tr"></i><i class="cut bl"></i><i class="cut br"></i>'}
+        <div class="ticket-body">
+          <div class="stars">★★★★★</div>
+          <p>${r.text}</p>
+          <footer><span><b>${r.name}</b> · мастер ${E.master(r.master).short}</span><span>${r.date}</span></footer>
+        </div>
+      </div>
+    </article>`).join('');
+  $$('[data-scroll]').forEach((b) => b.addEventListener('click', () => {
+    track.scrollBy({ left: Number(b.dataset.scroll) * (track.firstElementChild.offsetWidth + 18), behavior: 'smooth' });
+  }));
+
+  /* ---------- курсы ---------- */
+  $('#courseList').innerHTML = E.services.filter((s) => s.course).map((s) => `
+    <div class="course"><div><b>${s.name}</b><small>${s.note}</small></div><div class="p">${E.rub(s.price)}</div></div>`).join('');
+
+  /* ---------- карта Google ---------- */
+  const q = encodeURIComponent(E.studio.mapQuery);
+  $('#map').innerHTML = `<iframe title="Everluxe на карте" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${q}&z=16&hl=ru&output=embed"></iframe>`;
+
+  /* ---------- появление ---------- */
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  $$('.reveal').forEach((el) => io.observe(el));
+
+  /* =========================================================
+     Запись: услуга → мастер → дата/время → контакты
+     ========================================================= */
+  const modal = $('#modal'), body = $('#stepBody'), back = $('#backBtn'), next = $('#nextBtn'), foot = $('#modalFoot');
+  let st;
+
+  function open(pre = {}) {
+    const svc = pre.service ? E.service(pre.service) : null;
+    st = { step: 0, cat: svc ? svc.cat : 'mani', serviceId: pre.service || null, masterId: pre.master || null, date: E.toISO(new Date()), time: null, name: '', phone: '', comment: '' };
+    if (st.serviceId) st.step = st.masterId ? 2 : 1;
+    modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    render();
+  }
+  function close() {
+    modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = '';
+  }
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-book]');
+    if (b) { e.preventDefault(); open({ service: b.dataset.service, master: b.dataset.master }); }
+    if (e.target.closest('[data-close]')) close();
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
+
+  function slotsFor(date) {
+    const s = E.service(st.serviceId);
+    if (st.masterId && st.masterId !== 'any') return E.freeSlots(st.masterId, date, s.dur);
+    const all = new Set(); E.masters.forEach((m) => E.freeSlots(m.id, date, s.dur).forEach((t) => all.add(t)));
+    return [...all].sort();
+  }
+
+  function canNext() {
+    return [!!st.serviceId, !!st.masterId, !!st.time, st.name.trim().length > 1 && st.phone.replace(/\D/g, '').length === 11][st.step];
+  }
+
+  function render() {
+    $$('#steps i').forEach((i, k) => i.classList.toggle('on', k <= st.step));
+    foot.style.display = st.step > 3 ? 'none' : 'flex';
+    back.style.visibility = st.step === 0 ? 'hidden' : 'visible';
+    next.textContent = st.step === 3 ? 'Подтвердить запись' : 'Далее';
+    const s = st.serviceId && E.service(st.serviceId);
+
+    if (st.step === 0) {
+      body.innerHTML = `<div class="step-title">1 · Выберите услугу</div>
+        <div class="cat-chips">${E.categories.map((c) => `<button class="chip" data-c="${c.id}" aria-pressed="${c.id === st.cat}">${c.name}</button>`).join('')}</div>
+        <div class="opt-list">${E.services.filter((x) => x.cat === st.cat).map((x) => `
+          <button class="opt" data-s="${x.id}" aria-pressed="${x.id === st.serviceId}">
+            <span><b>${x.name}</b><small>${x.course ? x.note : E.dur(x.dur)}</small></span><span class="r">${x.from ? 'от ' : ''}${E.rub(x.price)}</span>
+          </button>`).join('')}</div>`;
+    }
+    if (st.step === 1) {
+      body.innerHTML = `<div class="step-title">2 · Выберите мастера</div><div class="opt-list">
+        <button class="opt" data-mm="any" aria-pressed="${st.masterId === 'any'}"><span class="who"><span class="av" style="background:var(--ink);color:var(--paper)">✦</span><span><b>Любой мастер</b><small>Покажем больше свободного времени</small></span></span></button>
+        ${E.masters.map((m) => `
+        <button class="opt" data-mm="${m.id}" aria-pressed="${m.id === st.masterId}">
+          <span class="who"><span class="av" style="background:linear-gradient(160deg,${m.tone[0]},${m.tone[1]})">${initials(m.name)}</span><span><b>${m.name}</b><small>${m.role} · опыт ${m.exp}</small></span></span>
+        </button>`).join('')}</div>`;
+    }
+    if (st.step === 2) {
+      const days = Array.from({ length: 14 }, (_, i) => E.addDays(new Date(), i));
+      const slots = slotsFor(st.date);
+      body.innerHTML = `<div class="step-title">3 · Дата и время</div>
+        <div class="days">${days.map((d) => { const iso = E.toISO(d); return `<button class="day" data-d="${iso}" aria-pressed="${iso === st.date}"><small>${d.toLocaleDateString('ru-RU', { weekday: 'short' })}</small><b>${d.getDate()}</b><small>${d.toLocaleDateString('ru-RU', { month: 'short' }).replace('.', '')}</small></button>`; }).join('')}</div>
+        ${slots.length ? `<div class="slots">${slots.map((t) => `<button class="slot" data-t="${t}" aria-pressed="${t === st.time}">${t}</button>`).join('')}</div>`
+          : '<div class="empty">На этот день всё занято — выберите другую дату или любого мастера.</div>'}`;
+      const sel = $('.day[aria-pressed="true"]', body); if (sel) sel.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    }
+    if (st.step === 3) {
+      const m = st.masterId === 'any' ? null : E.master(st.masterId);
+      body.innerHTML = `<div class="step-title">4 · Контакты</div>
+        <div class="summary">
+          <span><b>${s.name}</b> — ${s.from ? 'от ' : ''}${E.rub(s.price)}</span>
+          <span>${new Date(st.date + 'T12:00').toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' })}, ${st.time}</span>
+          <span>Мастер: ${m ? m.name : 'любой свободный'}</span>
+        </div>
+        <div class="field"><label for="fName">Имя</label><input id="fName" autocomplete="name" value="${st.name}" placeholder="Как к вам обращаться"></div>
+        <div class="field"><label for="fPhone">Телефон</label><input id="fPhone" type="tel" inputmode="tel" autocomplete="tel" value="${st.phone}" placeholder="+7 (___) ___-__-__"></div>
+        <div class="field"><label for="fCom">Комментарий</label><textarea id="fCom" placeholder="Пожелания по дизайну, длине, снятию">${st.comment}</textarea></div>`;
+      $('#fName', body).addEventListener('input', (e) => { st.name = e.target.value; next.disabled = !canNext(); });
+      $('#fPhone', body).addEventListener('input', (e) => { e.target.value = st.phone = maskPhone(e.target.value); next.disabled = !canNext(); });
+      $('#fCom', body).addEventListener('input', (e) => { st.comment = e.target.value; });
+    }
+    if (st.step === 4) {
+      const m = E.master(st.assigned);
+      body.innerHTML = `<div class="done"><div class="ok">✓</div>
+        <h3 style="font-size:34px">Вы записаны</h3>
+        <p>${s.name}<br>${new Date(st.date + 'T12:00').toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' })} в ${st.time} · мастер ${m.name}</p>
+        <p style="font-size:13px">Администратор подтвердит запись по&nbsp;телефону. Заявка уже видна в&nbsp;<a href="admin.html">CRM (демо)</a>.</p>
+        <button class="btn btn-dark" data-close style="margin-top:12px">Отлично</button></div>`;
+    }
+    next.disabled = !canNext();
+  }
+
+  function maskPhone(v) {
+    let d = v.replace(/\D/g, '');
+    if (d.startsWith('8')) d = '7' + d.slice(1);
+    if (!d.startsWith('7')) d = '7' + d;
+    d = d.slice(0, 11);
+    const p = [d.slice(1, 4), d.slice(4, 7), d.slice(7, 9), d.slice(9, 11)];
+    let out = '+7';
+    if (p[0]) out += ' (' + p[0] + (p[0].length === 3 ? ')' : '');
+    if (p[1]) out += ' ' + p[1];
+    if (p[2]) out += '-' + p[2];
+    if (p[3]) out += '-' + p[3];
+    return out;
+  }
+
+  body.addEventListener('click', (e) => {
+    const t = e.target.closest('button'); if (!t) return;
+    if (t.dataset.c) { st.cat = t.dataset.c; render(); }
+    if (t.dataset.s) { st.serviceId = t.dataset.s; st.time = null; st.step = st.masterId ? 2 : 1; render(); }
+    if (t.dataset.mm) { st.masterId = t.dataset.mm; st.time = null; st.step = 2; render(); }
+    if (t.dataset.d) { st.date = t.dataset.d; st.time = null; render(); }
+    if (t.dataset.t) { st.time = t.dataset.t; render(); }
+  });
+  back.addEventListener('click', () => { st.step = Math.max(0, st.step - 1); render(); });
+  next.addEventListener('click', () => {
+    if (!canNext()) return;
+    if (st.step < 3) { st.step++; render(); return; }
+    const s = E.service(st.serviceId);
+    let mid = st.masterId;
+    if (mid === 'any') mid = E.masters.find((m) => E.freeSlots(m.id, st.date, s.dur).includes(st.time)).id;
+    E.addBooking({ name: st.name.trim(), phone: st.phone, serviceId: s.id, masterId: mid, date: st.date, time: st.time, dur: s.dur, price: s.price, source: 'site', comment: st.comment.trim() });
+    st.assigned = mid; st.step = 4; render();
+    $('#nearest').textContent = nearestSlot();
+  });
+})();

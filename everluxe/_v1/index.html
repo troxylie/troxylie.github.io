@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Everluxe — студия маникюра и педикюра</title>
+  <meta name="description" content="Маникюр, педикюр, nail-art и обучение в студии Everluxe. Онлайн-запись к мастеру.">
+  <link rel="icon" href="assets/logo-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Forum&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<header class="header" id="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Everluxe — на главную">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">EVERLUXE<small>nail studio</small></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#price">Прайс</a>
+      <a href="#works">Работы</a>
+      <a href="#masters">Мастера</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#courses">Обучение</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="header-cta">
+      <a class="header-phone" data-phone></a>
+      <button class="btn btn-dark btn-sm" data-book>Записаться</button>
+      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow">Студия маникюра и педикюра</span>
+        <h1>Тихая роскошь <em>в каждой детали</em></h1>
+        <p class="hero-lead">Маникюр, педикюр и обучение в&nbsp;Everluxe. Стерильность по&nbsp;СанПиН, премиальные материалы и&nbsp;мастера, к&nbsp;которым возвращаются.</p>
+        <div class="hero-actions">
+          <button class="btn btn-dark" data-book><span class="dot"></span>Записаться онлайн</button>
+          <a class="btn btn-ghost" href="#price">Смотреть прайс</a>
+        </div>
+        <div class="hero-facts">
+          <div><b>7 лет</b><span>заботимся о&nbsp;руках</span></div>
+          <div><b>4</b><span>мастера в&nbsp;команде</span></div>
+          <div><b>3 нед.</b><span>гарантия на&nbsp;покрытие</span></div>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="arch"><div class="arch-in" id="heroArt"></div></div>
+        <div class="float-card a">
+          <div class="stars">★★★★★</div>
+          <b>4.9 из 5</b>
+          по&nbsp;отзывам гостей
+        </div>
+        <div class="float-card b">
+          <span class="mk" aria-hidden="true"></span>
+          <div><strong>Ближайшее окно</strong><br><span id="nearest">сегодня</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Быстрые карточки в стиле VK-обложек -->
+  <section class="quick">
+    <div class="wrap quick-grid">
+      <a class="quick-card ticket reveal" href="#price" data-cat="mani"><div class="ticket-in"><i class="cut tl"></i><i class="cut tr"></i><i class="cut bl"></i><i class="cut br"></i><div class="ticket-body">Маникюр<small>от 1 200 ₽</small></div></div></a>
+      <a class="quick-card ticket reveal" href="#price" data-cat="pedi"><div class="ticket-in"><i class="cut l"></i><i class="cut r"></i><div class="ticket-body">Педикюр<small>от 2 000 ₽</small></div></div></a>
+      <a class="quick-card ticket reveal" href="#reviews"><div class="ticket-in"><i class="cut tl"></i><i class="cut tr"></i><i class="cut bl"></i><i class="cut br"></i><div class="ticket-body">Отзывы<small>★★★★★</small></div></div></a>
+      <a class="quick-card ticket reveal" href="#courses"><div class="ticket-in"><i class="cut l"></i><i class="cut r"></i><div class="ticket-body">Обучающие курсы<small>с сертификатом</small></div></div></a>
+    </div>
+  </section>
+
+  <!-- ПРАЙС -->
+  <section class="section" id="price">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div><span class="eyebrow">Стоимость</span><h2>Прайс</h2></div>
+        <p>Цена фиксируется при записи. Снятие предыдущего покрытия нашего мастера — бесплатно.</p>
+      </div>
+      <div class="price-wrap reveal">
+        <div class="tabs" role="tablist" id="tabs"></div>
+        <div>
+          <div class="price-panel" id="pricePanel" role="tabpanel"></div>
+          <p class="price-foot">Стерилизация инструмента в сухожаре, одноразовые пилки и&nbsp;баффы включены в&nbsp;стоимость.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- РАБОТЫ -->
+  <section class="section" id="works" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div><span class="eyebrow">Портфолио</span><h2>Примеры работ</h2></div>
+        <p>Под каждой работой — мастер, который её сделал. Понравился стиль — записывайтесь прямо к&nbsp;нему.</p>
+      </div>
+      <div class="chips reveal" id="workFilter"></div>
+      <div class="works-grid" id="works-grid"></div>
+      <p class="ph-note">* В демо-вёрстке вместо фото — иллюстрации. Заменяются на реальные снимки работ 1:1.</p>
+    </div>
+  </section>
+
+  <!-- МАСТЕРА -->
+  <section class="section masters" id="masters">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div><span class="eyebrow">Команда</span><h2>Мастера</h2></div>
+        <p>Каждый мастер проходит внутреннее обучение и&nbsp;аттестацию по&nbsp;стандартам студии.</p>
+      </div>
+      <div class="masters-grid" id="mastersGrid"></div>
+    </div>
+  </section>
+
+  <!-- ОТЗЫВЫ -->
+  <section class="section" id="reviews">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div><span class="eyebrow">Нам доверяют</span><h2>Отзывы</h2></div>
+        <div class="reviews-nav">
+          <button class="round" data-scroll="-1" aria-label="Назад">←</button>
+          <button class="round" data-scroll="1" aria-label="Вперёд">→</button>
+        </div>
+      </div>
+      <div class="reviews-track" id="reviewsTrack"></div>
+    </div>
+  </section>
+
+  <!-- КУРСЫ -->
+  <section class="courses" id="courses">
+    <div class="mark" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow">Everluxe academy</span>
+        <h2>Обучающие курсы</h2>
+        <p>Учим профессии с&nbsp;нуля и&nbsp;прокачиваем практикующих мастеров. Маленькие группы до&nbsp;4 человек, модели и&nbsp;материалы — от&nbsp;студии.</p>
+        <button class="btn btn-gold" data-book data-service="c1" style="margin-top:28px">Записаться на курс</button>
+      </div>
+      <div class="course-list reveal" id="courseList"></div>
+    </div>
+  </section>
+
+  <!-- КОНТАКТЫ -->
+  <section class="section" id="contacts">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div><span class="eyebrow">Ждём в гости</span><h2>Контакты</h2></div>
+      </div>
+      <div class="contacts-grid">
+        <div class="contact-card ticket reveal">
+          <div class="ticket-in"><i class="cut l"></i><i class="cut r"></i>
+            <div class="ticket-body">
+              <dl>
+                <div><dt>Адрес</dt><dd data-address></dd></div>
+                <div><dt>Режим работы</dt><dd data-hours></dd></div>
+                <div><dt>Телефон</dt><dd><a data-phone></a><small><a data-vk target="_blank" rel="noopener">Мы во ВКонтакте →</a></small></dd></div>
+              </dl>
+              <button class="btn btn-dark" data-book><span class="dot"></span>Записаться онлайн</button>
+            </div>
+          </div>
+        </div>
+        <div class="map reveal" id="map"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">EVERLUXE<small>nail studio</small></span></a>
+    <div class="footer-links">
+      <a href="#price">Прайс</a><a href="#masters">Мастера</a><a data-vk target="_blank" rel="noopener">ВКонтакте</a><a href="admin.html">CRM (демо)</a>
+    </div>
+    <span>© <span id="year"></span> Everluxe</span>
+  </div>
+</footer>
+
+<button class="btn btn-dark sticky-book" data-book><span class="dot"></span>Записаться онлайн</button>
+
+<!-- Модалка записи -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal-bg" data-close></div>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" data-close aria-label="Закрыть">×</button>
+    <h3 id="modalTitle">Запись</h3>
+    <div class="steps" id="steps"><i></i><i></i><i></i><i></i></div>
+    <div id="stepBody"></div>
+    <div class="modal-foot" id="modalFoot">
+      <button class="btn btn-ghost" id="backBtn">Назад</button>
+      <button class="btn btn-dark" id="nextBtn">Далее</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/data.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

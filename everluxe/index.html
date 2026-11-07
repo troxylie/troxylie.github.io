@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Everluxe — студия маникюра и педикюра</title>
+  <meta name="description" content="Маникюр, педикюр, nail-art и обучение в студии Everluxe. Онлайн-запись к мастеру.">
+  <link rel="icon" href="assets/logo-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Forum&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css?v=8">
+</head>
+<body>
+
+<header class="header" id="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Everluxe — на главную">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">EVERLUXE<small>nail studio</small></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#price">Прайс</a>
+      <a href="#works">Работы</a>
+      <a href="#masters">Мастера</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#courses">Обучение</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="header-cta">
+      <a class="header-phone" data-phone></a>
+      <button class="btn btn-dark btn-sm" data-book>Записаться</button>
+      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero hero--slides" aria-label="Студия Everluxe">
+    <!-- фото работ на всю ширину, меняются сами -->
+    <div class="hero-slides" id="heroSlides" aria-hidden="true"></div>
+    <!-- размытие слева направо под текстом -->
+    <div class="hero-veil" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">Ногтевая студия в Самаре</span>
+        <h1>Тихая роскошь <em>в каждой детали</em></h1>
+        <p class="hero-lead">Маникюр, педикюр, брови и&nbsp;ресницы, обучение мастеров. Ново-Вокзальная, 130&nbsp;— в&nbsp;115&nbsp;м от&nbsp;остановки «Улица Фадеева».</p>
+        <div class="hero-actions">
+          <button class="btn btn-dark" data-book><span class="dot"></span>Записаться онлайн</button>
+          <a class="btn btn-ghost" href="#price">Смотреть прайс</a>
+        </div>
+      </div>
+      <div class="hero-dots" id="heroDots" role="group" aria-label="Фото работ"></div>
+    </div>
+  </section>
+
+  <!-- Быстрые карточки в стиле VK-обложек -->
+  <section class="quick">
+    <div class="wrap quick-grid">
+      <a class="quick-card ticket reveal" href="#price" data-cat="mani"><div class="ticket-in"><i class="cut tl"></i><i class="cut tr"></i><i class="cut bl"></i><i class="cut br"></i><div class="ticket-body">Маникюр<small>от 1 200 ₽</small></div></div></a>
+      <a class="quick-card ticket reveal" href="#price" data-cat="pedi"><div class="ticket-in"><i class="cut l"></i><i class="cut r"></i><div class="ticket-body">Педикюр<small>от 2 000 ₽</small></div></div></a>
+      <a class="quick-card ticket reveal" href="#reviews"><div class="ticket-in"><i class="cut tl"></i><i class="cut tr"></i><i class="cut bl"></i><i class="cut br"></i><div class="ticket-body">Отзывы<small>★★★★★</small></div></div></a>
+      <a class="quick-card ticket reveal" href="#courses"><div class="ticket-in"><i class="cut l"></i><i class="cut r"></i><div class="ticket-body">Обучающие курсы<small>с сертификатом</small></div></div></a>
+    </div>
+  </section>
+
+  <!-- ПРАЙС -->
+  <section class="section" id="price">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Прайс</h2>
+        <p>Цена фиксируется при записи. Снятие предыдущего покрытия нашего мастера — бесплатно.</p>
+      </div>
+      <!-- React-остров (motion/react): вкладки и список услуг -->
+      <div class="price-wrap reveal" id="priceRoot"></div>
+      <p class="price-foot price-foot--out">Стерилизация инструмента в сухожаре, одноразовые пилки и&nbsp;баффы включены в&nbsp;стоимость.</p>
+    </div>
+  </section>
+
+  <!-- РАБОТЫ -->
+  <section class="section" id="works" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Примеры работ</h2>
+      </div>
+      <!-- React-остров (motion/react): фильтр по мастеру и сетка работ -->
+      <div id="worksRoot" class="reveal"></div>
+    </div>
+  </section>
+
+  <!-- МАСТЕРА -->
+  <section class="section masters" id="masters">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Мастера</h2>
+      </div>
+      <div class="masters-grid" id="mastersGrid"></div>
+    </div>
+  </section>
+
+  <!-- ОТЗЫВЫ -->
+  <section class="section" id="reviews">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Отзывы</h2>
+        <div class="reviews-nav">
+          <button class="round" data-scroll="-1" aria-label="Назад">←</button>
+          <button class="round" data-scroll="1" aria-label="Вперёд">→</button>
+        </div>
+      </div>
+      <div class="reviews-track" id="reviewsTrack"></div>
+    </div>
+  </section>
+
+  <!-- КУРСЫ -->
+  <section class="courses" id="courses">
+    <div class="mark" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="reveal">
+        <h2>Обучающие курсы</h2>
+        <p>Учим профессии с&nbsp;нуля и&nbsp;прокачиваем практикующих мастеров. Маленькие группы до&nbsp;4 человек, модели и&nbsp;материалы — от&nbsp;студии.</p>
+        <button class="btn btn-gold" data-book data-service="c1" style="margin-top:28px">Записаться на курс</button>
+      </div>
+      <div class="course-list reveal" id="courseList"></div>
+    </div>
+  </section>
+
+  <!-- КОНТАКТЫ -->
+  <section class="section" id="contacts">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Контакты</h2>
+      </div>
+      <div class="contacts-grid">
+        <div class="contact-card ticket reveal">
+          <div class="ticket-in"><i class="cut l"></i><i class="cut r"></i>
+            <div class="ticket-body">
+              <dl>
+                <div><dt>Адрес</dt><dd data-address></dd></div>
+                <div><dt>Режим работы</dt><dd data-hours></dd></div>
+                <div><dt>Телефон</dt><dd><a data-phone></a><small><a data-vk target="_blank" rel="noopener">Мы во ВКонтакте →</a></small></dd></div>
+              </dl>
+              <button class="btn btn-dark" data-book><span class="dot"></span>Записаться онлайн</button>
+            </div>
+          </div>
+        </div>
+        <div class="map reveal" id="map"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">EVERLUXE<small>nail studio</small></span></a>
+    <div class="footer-links">
+      <a href="#price">Прайс</a><a href="#masters">Мастера</a><a data-vk target="_blank" rel="noopener">ВКонтакте</a><a href="admin.html">CRM (демо)</a>
+    </div>
+    <span>© <span id="year"></span> Everluxe</span>
+  </div>
+</footer>
+
+<button class="btn btn-dark sticky-book" data-book><span class="dot"></span>Записаться онлайн</button>
+
+<!-- Модалка записи -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal-bg" data-close></div>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" data-close aria-label="Закрыть">×</button>
+    <h3 id="modalTitle">Запись</h3>
+    <div class="steps" id="steps"><i></i><i></i><i></i><i></i></div>
+    <div id="stepBody"></div>
+    <div class="modal-foot" id="modalFoot">
+      <button class="btn btn-ghost" id="backBtn">Назад</button>
+      <button class="btn btn-dark" id="nextBtn">Далее</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/data.js?v=8"></script>
+<script src="assets/site.js?v=8"></script>
+<!-- React + Motion без сборки: версии закреплены -->
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@19.2.0",
+    "react/jsx-runtime": "https://esm.sh/react@19.2.0/jsx-runtime",
+    "react-dom/client": "https://esm.sh/react-dom@19.2.0/client?external=react",
+    "motion/react": "https://esm.sh/motion@14.6.0/react?external=react,react-dom",
+    "htm": "https://esm.sh/htm@3.1.1"
+  }
+}
+</script>
+<script type="module" src="assets/islands.js?v=8"></script>
+</body>
+</html>
